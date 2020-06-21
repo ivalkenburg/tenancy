@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers\Tenancy;
+namespace App\Helpers\Tenancy\Models;
 
 use App\Traits\UsesUuid;
 

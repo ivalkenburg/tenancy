@@ -11,19 +11,20 @@ trait UsesUuid
      */
     protected static function bootUsesUuid()
     {
-        static::creating(fn ($model) => $model->setUuid());
+        static::creating(fn($model) => $model->setUuid());
     }
 
     /**
+     * @param bool $force
      * @return void
      */
-    public function setUuid()
+    public function setUuid($force = false)
     {
-        if (!$this->getKey()) {
+        if ($this->getKey() && !$force) {
             return;
         }
 
-        $this->{$this->getKeyName()} = (string) Str::uuid();
+        $this->{$this->getKeyName()} = (string)Str::uuid();
     }
 
     /**
@@ -39,6 +40,6 @@ trait UsesUuid
      */
     public function getIncrementing()
     {
-        return  false;
+        return false;
     }
 }

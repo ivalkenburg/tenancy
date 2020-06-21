@@ -175,6 +175,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Custom Service Providers
+         */
+        \App\Helpers\Tenancy\TenancyServiceProvider::class
     ],
 
     /*
@@ -228,5 +232,4 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
     ],
 
-    'tenant_aware' => true,
 ];

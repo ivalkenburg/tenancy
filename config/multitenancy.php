@@ -6,6 +6,12 @@ use Spatie\Multitenancy\Actions\MakeTenantCurrentAction;
 use Spatie\Multitenancy\Actions\MigrateTenantAction;
 
 return [
+
+    /*
+     * Turn off tenant awareness.
+     */
+    'enable' => true,
+
     /*
      * This class is responsible for determining which tenant should be current
      * for the given request.
@@ -29,7 +35,7 @@ return [
      *
      * It must be or extend `Spatie\Multitenancy\Models\Tenant::class`
      */
-    'tenant_model' => \App\Helpers\Tenancy\Tenant::class,
+    'tenant_model' => \App\Helpers\Tenancy\Models\Tenant::class,
 
     /*
      * If there is a current tenant when dispatching a job, the id of the current tenant

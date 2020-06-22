@@ -1,7 +1,6 @@
 <?php
 
 use Spatie\Multitenancy\Actions\ForgetCurrentTenantAction;
-use Spatie\Multitenancy\Actions\MakeQueueTenantAwareAction;
 use Spatie\Multitenancy\Actions\MakeTenantCurrentAction;
 use Spatie\Multitenancy\Actions\MigrateTenantAction;
 
@@ -27,7 +26,7 @@ return [
      * A valid task is any class that implements Spatie\Multitenancy\Tasks\SwitchTenantTask
      */
     'switch_tenant_tasks' => [
-        // add tasks here
+        \App\Helpers\Tenancy\Tasks\PrefixCache::class,
     ],
 
     /*
@@ -68,7 +67,7 @@ return [
     'actions' => [
         'make_tenant_current_action' => MakeTenantCurrentAction::class,
         'forget_current_tenant_action' => ForgetCurrentTenantAction::class,
-        'make_queue_tenant_aware_action' => MakeQueueTenantAwareAction::class,
+        'make_queue_tenant_aware_action' => \App\Helpers\Tenancy\MakeQueueTenantAwareAction::class,
         'migrate_tenant' => MigrateTenantAction::class,
     ],
 ];

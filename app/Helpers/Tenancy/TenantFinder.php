@@ -2,21 +2,18 @@
 
 namespace App\Helpers\Tenancy;
 
+use App\Helpers\Tenancy\Models\Tenant;
 use Illuminate\Http\Request;
-use Spatie\Multitenancy\Models\Tenant;
+use Spatie\Multitenancy\Models\Tenant as BaseTenant;
 
 class TenantFinder extends \Spatie\Multitenancy\TenantFinder\TenantFinder
 {
     /**
      * @param Request $request
-     * @return Tenant|null
+     * @return BaseTenant|null
      */
-    public function findForRequest(Request $request): ?Tenant
+    public function findForRequest(Request $request): ?BaseTenant
     {
-        if (!config('multitenancy.enable')) {
-            return null;
-        }
-
-        return Models\Tenant::whereDomain($request->getHost())->first();
+        return Tenant::whereDomain($request->getHost())->first();
     }
 }

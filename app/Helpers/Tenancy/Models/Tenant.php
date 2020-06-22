@@ -8,6 +8,8 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
 {
     use UsesUuid;
 
+    protected $guarded = [];
+
     /**
      * @return string|null
      */

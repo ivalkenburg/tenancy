@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Helpers\Tenancy\Rules\Unique;
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 

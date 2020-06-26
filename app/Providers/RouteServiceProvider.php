@@ -24,29 +24,14 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/home';
 
     /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-
-        parent::boot();
-    }
-
-    /**
      * Define the routes for the application.
      *
      * @return void
      */
     public function map()
     {
-        $this->mapApiRoutes();
-
+        $this->mapLandlordRoutes();
         $this->mapWebRoutes();
-
-        //
     }
 
     /**
@@ -58,23 +43,19 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
+        Route::middleware(['web', 'tenant.aware'])
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
     }
 
     /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
      * @return void
      */
-    protected function mapApiRoutes()
+    protected function mapLandlordRoutes()
     {
-        Route::prefix('api')
-            ->middleware('api')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/api.php'));
+        Route::domain(config('multitenancy.landlord_domain'))
+            ->middleware('web')
+            ->namespace($this->namespace . '\Landlord')
+            ->group(base_path('routes/landlord.php'));
     }
 }

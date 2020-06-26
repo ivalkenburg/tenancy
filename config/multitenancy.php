@@ -12,6 +12,11 @@ return [
     'enable' => true,
 
     /*
+     * Landlord domain.
+     */
+    'landlord_domain' => env('LANDLORD_DOMAIN', 'landlord.localhost'),
+
+    /*
      * This class is responsible for determining which tenant should be current
      * for the given request.
      *

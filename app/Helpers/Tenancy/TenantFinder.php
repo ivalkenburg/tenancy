@@ -14,6 +14,6 @@ class TenantFinder extends \Spatie\Multitenancy\TenantFinder\TenantFinder
      */
     public function findForRequest(Request $request): ?BaseTenant
     {
-        return Tenant::whereDomain($request->getHost())->first();
+        return Tenant::where('domain', $request->getHost())->first();
     }
 }

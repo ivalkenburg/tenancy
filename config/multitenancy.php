@@ -9,12 +9,12 @@ return [
     /*
      * Turn off tenant awareness.
      */
-    'enable' => true,
+    'enable' => env('TENANCY_ENABLE'),
 
     /*
      * Landlord domain.
      */
-    'landlord_domain' => env('LANDLORD_DOMAIN', 'landlord.localhost'),
+    'landlord_domain' => env('TENANCY_LANDLORD_DOMAIN', 'landlord.localhost'),
 
     /*
      * This class is responsible for determining which tenant should be current
@@ -31,7 +31,8 @@ return [
      * A valid task is any class that implements Spatie\Multitenancy\Tasks\SwitchTenantTask
      */
     'switch_tenant_tasks' => [
-        \App\Helpers\Tenancy\Tasks\PrefixCache::class,
+        \App\Helpers\Tenancy\Tasks\ChangeCachePrefix::class,
+        \App\Helpers\Tenancy\Tasks\ChangeAppUrl::class,
     ],
 
     /*

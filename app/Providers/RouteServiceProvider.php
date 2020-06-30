@@ -53,6 +53,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapLandlordRoutes()
     {
+        if (!config('multitenancy.enable')) {
+            return;
+        }
+
         Route::domain(config('multitenancy.landlord_domain'))
             ->middleware('web')
             ->namespace($this->namespace . '\Landlord')

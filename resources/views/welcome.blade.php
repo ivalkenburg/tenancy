@@ -81,11 +81,13 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    {{ \App\Helpers\Tenancy\Models\Tenant::current()->name }}
+                    {{ Tenant::isEnabled() ? Tenant::current()->name : 'Welcome' }}
                 </div>
 
                 <div class="links">
                     <a href="{{ route('mail') }}">Mail</a>
+                    <a href="{{ route('job') }}">Job</a>
+                    <a href="{{ route('cache') }}">Cache - {{ $cached ?? 'Nothing cached' }}</a>
                 </div>
             </div>
         </div>

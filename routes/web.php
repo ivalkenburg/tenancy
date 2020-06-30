@@ -8,3 +8,5 @@ Auth::routes();
 Route::get('/', 'WelcomeController')->name('welcome');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/mail', 'HomeController@mail')->name('mail');
+Route::get('/job', 'HomeController@job')->name('job');
+Route::get('/cache', 'HomeController@cache')->name('cache');

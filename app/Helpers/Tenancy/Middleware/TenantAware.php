@@ -29,6 +29,7 @@ class TenantAware
         if (!$request->session()->has(static::VALID_TENANT_SESSION_KEY)) {
             $request->session()->put(static::VALID_TENANT_SESSION_KEY, $currentTenantId);
         } elseif ($request->session()->get(static::VALID_TENANT_SESSION_KEY) !== $currentTenantId) {
+            $request->session()->invalidate();
             abort(Response::HTTP_UNAUTHORIZED);
         }
 

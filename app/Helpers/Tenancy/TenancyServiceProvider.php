@@ -15,6 +15,9 @@ class TenancyServiceProvider extends MultitenancyServiceProvider
             return;
         }
 
-        parent::boot();
+        $this->registerTenantFinder()
+            ->registerTasksCollection()
+            ->configureRequests()
+            ->configureQueue();
     }
 }

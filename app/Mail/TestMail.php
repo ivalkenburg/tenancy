@@ -13,12 +13,12 @@ class TestMail extends Mailable implements ShouldQueue, TenantAware
     use Queueable, SerializesModels;
 
     /**
-     * Build the message.
-     *
      * @return $this
      */
     public function build()
     {
+        info('TestMail', ['route' => route('home'), 'url' => url('/hello/world'), 'tenant' => route('tenants.create')]);
+
         return $this->view('mail.test');
     }
 }

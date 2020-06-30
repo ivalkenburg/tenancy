@@ -17,4 +17,12 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
     {
         return optional(static::current())->getKey();
     }
+
+    /**
+     * @return bool
+     */
+    public static function isEnabled()
+    {
+        return (bool) config('multitenancy.enable');
+    }
 }

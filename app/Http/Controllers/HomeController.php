@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Tenancy\Models\Tenant;
+use App\Helpers\Multitenancy\Models\Tenant;
 use App\Jobs\DelayedJob;
 use App\Mail\TestMail;
 use Illuminate\Http\Request;

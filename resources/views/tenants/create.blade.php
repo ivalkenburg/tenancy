@@ -10,7 +10,7 @@
 <body>
 <h1>Create Tenant</h1>
 <form method="post" action="{{ route('tenants.store') }}">
-    {{ csrf_field() }}
+    @csrf
     <div>
         <label for="domain">Domain</label>
         <input id="domain" type="text" name="domain">

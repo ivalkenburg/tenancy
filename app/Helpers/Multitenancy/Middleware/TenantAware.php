@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Helpers\Tenancy\Middleware;
+namespace App\Helpers\Multitenancy\Middleware;
 
-use App\Helpers\Tenancy\Models\Tenant;
+use App\Helpers\Multitenancy\Models\Tenant;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +18,7 @@ class TenantAware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!config('multitenancy.enable')) {
+        if (!Tenant::isMultitenancyEnabled()) {
             return $next($request);
         }
 

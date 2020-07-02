@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Helpers\Tenancy\Traits;
+namespace App\Helpers\Multitenancy\Traits;
 
-use App\Helpers\Tenancy\Models\Tenant;
+use App\Helpers\Multitenancy\Models\Tenant;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,14 +14,14 @@ trait TenantAware
      */
     protected static function bootTenantAware()
     {
-        if (!config('multitenancy.enable')) {
+        if (!Tenant::isMultitenancyEnabled()) {
             return;
         }
 
         $tenantId = Tenant::currentId();
 
         static::addGlobalScope('tenant', function ($query) use ($tenantId) {
-            $query->where('tenant_id', $tenantId);
+            $query->where(fn($query) => $query->where('tenant_id', $tenantId));
         });
 
         static::creating(function ($model) use ($tenantId) {
@@ -44,7 +44,7 @@ trait TenantAware
      */
     public function scopeByTenant($query, $tenant)
     {
-        if (!config('multitenancy.enable')) {
+        if (!Tenant::isMultitenancyEnabled()) {
             return $query;
         }
 

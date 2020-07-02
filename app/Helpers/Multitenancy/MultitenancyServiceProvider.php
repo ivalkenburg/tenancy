@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Helpers\Tenancy;
+namespace App\Helpers\Multitenancy;
 
-use Spatie\Multitenancy\MultitenancyServiceProvider;
+use App\Helpers\Multitenancy\Models\Tenant;
 
-class TenancyServiceProvider extends MultitenancyServiceProvider
+class MultitenancyServiceProvider extends \Spatie\Multitenancy\MultitenancyServiceProvider
 {
     /**
      * @return void
      */
     public function boot()
     {
-        if (!config('multitenancy.enable')) {
+        if (!Tenant::isMultitenancyEnabled()) {
             return;
         }
 

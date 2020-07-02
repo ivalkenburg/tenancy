@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Helpers\Tenancy;
+namespace App\Helpers\Multitenancy\Actions;
 
-use Spatie\Multitenancy\Jobs\NotTenantAware;
-use Spatie\Multitenancy\Jobs\TenantAware;
+use App\Helpers\Multitenancy\Models\Tenant;
 
 class MakeQueueTenantAwareAction extends \Spatie\Multitenancy\Actions\MakeQueueTenantAwareAction
 {
@@ -13,7 +12,7 @@ class MakeQueueTenantAwareAction extends \Spatie\Multitenancy\Actions\MakeQueueT
      */
     protected function isTenantAware(object $job): bool
     {
-        if (!config('multitenancy.enable')) {
+        if (!Tenant::isMultitenancyEnabled()) {
             return false;
         }
 

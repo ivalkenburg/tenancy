@@ -163,22 +163,19 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
-         */
-
-        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
         /*
          * Custom Service Providers
          */
-        \App\Helpers\Tenancy\TenancyServiceProvider::class
+        App\Packages\LaravelSettings\LaravelSettingsServiceProvider::class,
+        App\Helpers\Multitenancy\MultitenancyServiceProvider::class
     ],
 
     /*
@@ -230,7 +227,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Tenant' => \App\Helpers\Tenancy\Models\Tenant::class,
+        'Tenant' => App\Helpers\Multitenancy\Models\Tenant::class,
     ],
 
 ];

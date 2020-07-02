@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Helpers\Tenancy\Models;
+namespace App\Helpers\Multitenancy\Models;
 
 use App\Traits\UsesUuid;
 
 class Tenant extends \Spatie\Multitenancy\Models\Tenant
 {
     use UsesUuid;
+
+    protected static $multitenancyEnabled;
 
     protected $guarded = [];
 
@@ -21,8 +23,12 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
     /**
      * @return bool
      */
-    public static function isEnabled()
+    public static function isMultitenancyEnabled()
     {
-        return (bool) config('multitenancy.enable');
+        if (!isset(static::$multitenancyEnabled)) {
+            static::$multitenancyEnabled = (bool)config('multitenancy.enable');
+        }
+
+        return static::$multitenancyEnabled;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers\Tenancy\Tasks;
+namespace App\Helpers\Multitenancy\SwitchTasks;
 
 use Illuminate\Support\Str;
 use Spatie\Multitenancy\Models\Tenant;

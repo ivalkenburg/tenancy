@@ -1,4 +1,4 @@
-<h1>{{ Tenant::isEnabled() ? Tenant::current()->name : 'No tenant' }}</h1>
+<h1>{{ Tenant::isMultitenancyEnabled() ? Tenant::current()->name : 'No tenant' }}</h1>
 <a href="{{ route('welcome') }}">Go To Welcome</a>
 <br>
 <a href="{{ route('tenants.create') }}">Create Tenant</a>

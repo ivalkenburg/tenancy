@@ -10,8 +10,8 @@
 <body>
 <h1>Edit {{ $tenant->name }}</h1>
 <form method="post" action="{{ route('tenants.update', $tenant->id) }}">
-    {{ method_field('put') }}
-    {{ csrf_field() }}
+    @method('put')
+    @csrf
     <div>
         <label for="domain">Domain</label>
         <input id="domain" type="text" name="domain" value="{{ $tenant->domain }}">

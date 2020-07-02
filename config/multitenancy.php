@@ -1,9 +1,5 @@
 <?php
 
-use Spatie\Multitenancy\Actions\ForgetCurrentTenantAction;
-use Spatie\Multitenancy\Actions\MakeTenantCurrentAction;
-use Spatie\Multitenancy\Actions\MigrateTenantAction;
-
 return [
 
     /*
@@ -23,7 +19,7 @@ return [
      * This class should extend `Spatie\Multitenancy\TenantFinder\TenantFinder`
      *
      */
-    'tenant_finder' => \App\Helpers\Tenancy\TenantFinder::class,
+    'tenant_finder' => App\Helpers\Multitenancy\TenantFinder::class,
 
     /*
      * These tasks will be performed when switching tenants.
@@ -31,8 +27,9 @@ return [
      * A valid task is any class that implements Spatie\Multitenancy\Tasks\SwitchTenantTask
      */
     'switch_tenant_tasks' => [
-        \App\Helpers\Tenancy\Tasks\ChangeCachePrefix::class,
-        \App\Helpers\Tenancy\Tasks\ChangeAppUrl::class,
+        App\Helpers\Multitenancy\SwitchTasks\ChangeCachePrefix::class,
+        App\Helpers\Multitenancy\SwitchTasks\ChangeAppUrl::class,
+        App\Helpers\Multitenancy\SwitchTasks\SaveResetSettingsStore::class,
     ],
 
     /*
@@ -40,7 +37,7 @@ return [
      *
      * It must be or extend `Spatie\Multitenancy\Models\Tenant::class`
      */
-    'tenant_model' => \App\Helpers\Tenancy\Models\Tenant::class,
+    'tenant_model' => App\Helpers\Multitenancy\Models\Tenant::class,
 
     /*
      * If there is a current tenant when dispatching a job, the id of the current tenant
@@ -64,16 +61,16 @@ return [
     /*
      * This key will be used to bind the current tenant in the container.
      */
-    'current_tenant_container_key' => 'currentTenant',
+    'current_tenant_container_key' => 'current_tenant',
 
     /*
      * You can customize some of the behavior of this package by using our own custom action.
      * Your custom action should always extend the default one.
      */
     'actions' => [
-        'make_tenant_current_action' => MakeTenantCurrentAction::class,
-        'forget_current_tenant_action' => ForgetCurrentTenantAction::class,
-        'make_queue_tenant_aware_action' => \App\Helpers\Tenancy\MakeQueueTenantAwareAction::class,
-        'migrate_tenant' => MigrateTenantAction::class,
+        'make_tenant_current_action' => App\Helpers\Multitenancy\Actions\MakeTenantCurrentAction::class,
+        'forget_current_tenant_action' => Spatie\Multitenancy\Actions\ForgetCurrentTenantAction::class,
+        'make_queue_tenant_aware_action' => App\Helpers\Multitenancy\Actions\MakeQueueTenantAwareAction::class,
+        'migrate_tenant' => Spatie\Multitenancy\Actions\MigrateTenantAction::class,
     ],
 ];

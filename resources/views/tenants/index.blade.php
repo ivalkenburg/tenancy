@@ -19,8 +19,8 @@
                 <button type="submit">E</button>
             </form>
             <form style="display: inline" method="post" action="{{ route('tenants.destroy', $tenant->id) }}">
-                {{ csrf_field() }}
-                {{ method_field('delete') }}
+                @csrf
+                @method('delete')
                 <button type="submit">D</button>
             </form>
             <span>{{ $tenant->name }} ({{ $tenant->domain }})</span>

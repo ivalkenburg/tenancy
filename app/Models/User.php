@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Helpers\Tenancy\Traits\TenantAware;
+use App\Helpers\Multitenancy\Traits\TenantAware;
 use App\Traits\UsesUuid;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;

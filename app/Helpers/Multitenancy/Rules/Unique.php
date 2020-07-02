@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Helpers\Tenancy\Rules;
+namespace App\Helpers\Multitenancy\Rules;
 
-use App\Helpers\Tenancy\Models\Tenant;
+use App\Helpers\Multitenancy\Models\Tenant;
 
 class Unique extends \Illuminate\Validation\Rules\Unique
 {
@@ -24,7 +24,7 @@ class Unique extends \Illuminate\Validation\Rules\Unique
     {
         parent::__construct($table, $column);
 
-        if (config('multitenancy.enable')) {
+        if (Tenant::isMultitenancyEnabled()) {
             $this->where('tenant_id', Tenant::currentId());
         }
     }

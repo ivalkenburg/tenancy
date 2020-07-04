@@ -8,6 +8,7 @@ use Spatie\Multitenancy\Tasks\SwitchTenantTask;
 class ChangeCachePrefix implements SwitchTenantTask
 {
     protected $original;
+    protected $driver;
 
     /**
      * @param Tenant $tenant
@@ -16,9 +17,10 @@ class ChangeCachePrefix implements SwitchTenantTask
     public function makeCurrent(Tenant $tenant): void
     {
         $this->original = config('cache.prefix');
+        $this->driver = config('cache.default');
 
         config()->set('cache.prefix', str_replace('-', '', $tenant->id));
-        app('cache')->forgetDriver();
+        app('cache')->forgetDriver($this->driver);
     }
 
     /**
@@ -27,6 +29,6 @@ class ChangeCachePrefix implements SwitchTenantTask
     public function forgetCurrent(): void
     {
         config()->set('cache.prefix', $this->original);
-        app('cache')->forgetDriver();
+        app('cache')->forgetDriver($this->driver);
     }
 }

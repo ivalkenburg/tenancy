@@ -26,7 +26,7 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
     public static function isMultitenancyEnabled()
     {
         if (!isset(static::$multitenancyEnabled)) {
-            static::$multitenancyEnabled = (bool)config('multitenancy.enable');
+            static::$multitenancyEnabled = (bool) config('multitenancy.enable');
         }
 
         return static::$multitenancyEnabled;

@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -230,4 +230,18 @@ return [
         'Tenant' => App\Helpers\Multitenancy\Models\Tenant::class,
     ],
 
+    /*
+     * Default roles and permissions.
+     */
+
+    'default_permissions' => [
+        'roles' => [
+            'Default Admin' => 'Default admin created and managed by the application',
+            'Default User' => 'Default user created and managed by the application',
+        ],
+        'permissions' => [
+            'dispatch.jobs' => ['Default Admin', 'Default User'],
+            'send.mails' => ['Default User'],
+        ]
+    ]
 ];

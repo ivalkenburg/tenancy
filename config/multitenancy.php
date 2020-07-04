@@ -30,6 +30,7 @@ return [
         App\Helpers\Multitenancy\SwitchTasks\ChangeCachePrefix::class,
         App\Helpers\Multitenancy\SwitchTasks\ChangeAppUrl::class,
         App\Helpers\Multitenancy\SwitchTasks\SaveResetSettingsStore::class,
+        App\Helpers\Multitenancy\SwitchTasks\ReinitializePermissionCache::class,
     ],
 
     /*

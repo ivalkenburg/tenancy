@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Landlord;
 
 use App\Helpers\Multitenancy\Models\Tenant;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class TenantsController extends Controller
@@ -33,7 +36,9 @@ class TenantsController extends Controller
      */
     public function edit(Tenant $tenant)
     {
-        return view('landlord.tenants.edit', compact('tenant'));
+        $users = User::byTenant($tenant)->get();
+
+        return view('landlord.tenants.edit', compact('tenant', 'users'));
     }
 
     /**
@@ -67,6 +72,19 @@ class TenantsController extends Controller
         $tenant->update($request->only('domain', 'name'));
 
         return redirect(route('landlord.tenants.index'));
+    }
+
+    /**
+     * @param Tenant $tenant
+     * @param string $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function login(Tenant $tenant, $user)
+    {
+        $token = Str::random(32);
+        $tenant->execute(fn() => Cache::put("ext_login_{$token}", $user, 5));
+
+        return redirect($tenant->url("/login/{$token}", false));
     }
 
     /**

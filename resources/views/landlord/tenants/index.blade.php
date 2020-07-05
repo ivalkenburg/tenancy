@@ -13,7 +13,8 @@
                 <form style="display: inline" action="{{ route('landlord.tenants.edit', $tenant->id) }}">
                     <button type="submit">E</button>
                 </form>
-                <form style="display: inline" method="post" action="{{ route('landlord.tenants.destroy', $tenant->id) }}">
+                <form style="display: inline" method="post"
+                      action="{{ route('landlord.tenants.destroy', $tenant->id) }}">
                     @csrf
                     @method('delete')
                     <button type="submit">D</button>

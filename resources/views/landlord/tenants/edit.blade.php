@@ -17,4 +17,15 @@
         </div>
         <button type="submit">Update</button>
     </form>
+    <h2>Users</h2>
+    <ul>
+        @foreach($users as $user)
+            <li>
+                <form style="display: inline" action="{{ route('landlord.tenants.login', [$tenant->id, $user->id]) }}">
+                    <button type="submit">L</button>
+                </form>
+                <span>{{ $user->name }}</span>
+            </li>
+        @endforeach
+    </ul>
 @endsection

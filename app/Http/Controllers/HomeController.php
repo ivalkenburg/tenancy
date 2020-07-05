@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
+use Symfony\Component\HttpFoundation\Response;
+use function App\Helpers\can;
 
 class HomeController extends Controller
 {
@@ -31,6 +33,8 @@ class HomeController extends Controller
      */
     public function mail(Request $request)
     {
+        abort_unless(can('send.mails'), Response::HTTP_UNAUTHORIZED);
+
         Mail::to($request->user())->send(new TestMail);
 
         return redirect()->back();
@@ -41,6 +45,8 @@ class HomeController extends Controller
      */
     public function job()
     {
+        abort_unless(can('dispatch.jobs'), Response::HTTP_UNAUTHORIZED);
+
         DelayedJob::dispatch(rand(5, 15));
 
         return redirect()->back();

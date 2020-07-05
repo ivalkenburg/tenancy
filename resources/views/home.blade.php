@@ -23,11 +23,9 @@
                     <a href="{{ route('job') }}">Dispatch Job</a>
                 </li>
             @endif
-            @if(\App\Helpers\can('change.settings'))
-                <li>
-                    <a href="{{ route('settings') }}">Settings</a>
-                </li>
-            @endif
+            <li>
+                <a href="{{ route('settings') }}">Settings</a>
+            </li>
             <li>
                 <form id="logout" method="post" action="{{ route('logout') }}">
                     @csrf
@@ -38,5 +36,10 @@
         <li>
             <a href="{{ route('cache') }}">Cached Value {{ cache('cached_value') }}</a>
         </li>
+        @if(Tenant::isMultitenancyEnabled())
+            <li>
+                <a href="{{ route('landlord.home') }}">Landlord Home</a>
+            </li>
+        @endif
     </ul>
 @endsection

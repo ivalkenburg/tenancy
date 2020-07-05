@@ -31,4 +31,14 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
 
         return static::$multitenancyEnabled;
     }
+
+    /**
+     * @param string $path
+     * @param bool $secure
+     * @return string
+     */
+    public function url($path = null, $secure = true)
+    {
+        return ($secure ? 'https://' : 'http://') . trim($this->domain, '/') . '/' . trim($path ?? '', '/');
+    }
 }

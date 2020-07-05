@@ -22,7 +22,7 @@ class SettingsController extends Controller
      */
     public function set(Request $request)
     {
-        $request->validate(['foobar' => ['required', 'string']]);
+        $request->validate(['foobar' => ['nullable', 'string']]);
 
         Settings::set('foobar', $request->foobar);
 

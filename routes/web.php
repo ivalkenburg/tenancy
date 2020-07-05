@@ -3,10 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Auth::routes();
+Auth::routes(['confirm' => false, 'verify' => false]);
 
-Route::get('/', 'WelcomeController')->name('welcome');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@home')->name('home');
 Route::get('/mail', 'HomeController@mail')->name('mail');
 Route::get('/job', 'HomeController@job')->name('job');
 Route::get('/cache', 'HomeController@cache')->name('cache');

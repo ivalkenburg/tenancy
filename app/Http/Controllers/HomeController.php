@@ -14,13 +14,13 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['cache', 'job']);
+        $this->middleware('auth')->except(['home', 'cache']);
     }
 
     /**
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\View\View
      */
-    public function index()
+    public function home()
     {
         return view('home');
     }

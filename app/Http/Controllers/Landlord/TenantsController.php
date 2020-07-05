@@ -14,7 +14,7 @@ class TenantsController extends Controller
      */
     public function index()
     {
-        return view('tenants.index', [
+        return view('landlord.tenants.index', [
             'tenants' => Tenant::all()
         ]);
     }
@@ -24,7 +24,7 @@ class TenantsController extends Controller
      */
     public function create()
     {
-        return view('tenants.create');
+        return view('landlord.tenants.create');
     }
 
     /**
@@ -33,7 +33,7 @@ class TenantsController extends Controller
      */
     public function edit(Tenant $tenant)
     {
-        return view('tenants.edit', compact('tenant'));
+        return view('landlord.tenants.edit', compact('tenant'));
     }
 
     /**
@@ -42,14 +42,14 @@ class TenantsController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'domain' => ['required', 'string', Rule::unique('tenants')],
             'name' => ['required', 'string'],
         ]);
 
-        Tenant::create($validated);
+        Tenant::create($request->only('domain', 'name'));
 
-        return redirect(route('tenants.index'));
+        return redirect(route('landlord.tenants.index'));
     }
 
     /**
@@ -59,14 +59,14 @@ class TenantsController extends Controller
      */
     public function update(Tenant $tenant, Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'domain' => ['required', 'string', Rule::unique('tenants')->ignore($tenant->id)],
             'name' => ['required', 'string'],
         ]);
 
-        $tenant->update($validated);
+        $tenant->update($request->only('domain', 'name'));
 
-        return redirect(route('tenants.index'));
+        return redirect(route('landlord.tenants.index'));
     }
 
     /**
@@ -78,6 +78,6 @@ class TenantsController extends Controller
     {
         $tenant->delete();
 
-        return redirect(route('tenants.index'));
+        return redirect(route('landlord.tenants.index'));
     }
 }

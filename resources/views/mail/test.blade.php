@@ -13,7 +13,9 @@
         <li>Setting: {{ settings()->get('foobar') }}</li>
         <li>Cached value: {{ cache('cached_value') }}</li>
         <li><a href="{{ route('home') }}">Home</a></li>
-        <li><a href="{{ route('landlord.tenants.index') }}">Tenants</a></li>
+        @if(Tenant::isMultitenancyEnabled())
+            <li><a href="{{ route('landlord.tenants.index') }}">Tenants</a></li>
+        @endif
         <li><a href="{{ url('/hello/world') }}">Hello World (404)</a></li>
     </ul>
 </body>

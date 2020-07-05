@@ -16,8 +16,6 @@ class TestMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        info('TestMail', ['route' => route('home'), 'url' => url('/hello/world'), 'tenant' => route('tenants.create')]);
-
         return $this->view('mail.test');
     }
 }

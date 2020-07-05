@@ -1,6 +1,6 @@
 <h1>{{ Tenant::isMultitenancyEnabled() ? Tenant::current()->name : 'No tenant' }}</h1>
-<a href="{{ route('home') }}">Go To Home</a>
-<br>
-<a href="{{ route('landlord.tenants.create') }}">Create Tenant</a>
-<br>
-<a href="{{ url('/hello/world') }}">Hello World</a>
+<ul>
+    <li><a href="{{ route('home') }}">Home</a></li>
+    <li><a href="{{ route('landlord.tenants.index') }}">Tenants</a></li>
+    <li><a href="{{ url('/hello/world') }}">Hello World (404)</a></li>
+</ul>

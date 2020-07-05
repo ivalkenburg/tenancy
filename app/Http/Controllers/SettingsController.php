@@ -20,7 +20,7 @@ class SettingsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function set(Request $request)
+    public function update(Request $request)
     {
         $request->validate(['foobar' => ['nullable', 'string']]);
 

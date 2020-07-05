@@ -5,12 +5,12 @@ return [
     /*
      * Turn off tenant awareness.
      */
-    'enable' => env('TENANCY_ENABLE'),
+    'enable' => env('MULTITENANCY_ENABLE'),
 
     /*
      * Landlord domain.
      */
-    'landlord_domain' => env('TENANCY_LANDLORD_DOMAIN', 'landlord.localhost'),
+    'landlord_domain' => env('MULTITENANCY_LANDLORD_DOMAIN', 'landlord.localhost'),
 
     /*
      * This class is responsible for determining which tenant should be current

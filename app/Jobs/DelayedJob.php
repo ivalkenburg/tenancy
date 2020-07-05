@@ -31,7 +31,7 @@ class DelayedJob implements ShouldQueue
      */
     public function handle()
     {
-        info('DelayedJob', ['route' => route('welcome'), 'url' => url('/hello/world'), 'tenant' => route('tenants.create')]);
+        info('DelayedJob', ['route' => route('welcome'), 'url' => url('/hello/world'), 'tenant' => route('landlord.tenants.create')]);
 
         sleep($this->sleep);
     }

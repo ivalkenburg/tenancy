@@ -13,15 +13,21 @@
                 <a href="{{ route('register') }}">Register</a>
             </li>
         @else
-            <li>
-                <a href="{{ route('mail') }}">Send Mail</a>
-            </li>
-            <li>
-                <a href="{{ route('job') }}">Dispatch Job</a>
-            </li>
-            <li>
-                <a href="{{ route('settings') }}">Settings</a>
-            </li>
+            @if(\App\Helpers\can('send.mails'))
+                <li>
+                    <a href="{{ route('mail') }}">Send Mail</a>
+                </li>
+            @endif
+            @if(\App\Helpers\can('dispatch.jobs'))
+                <li>
+                    <a href="{{ route('job') }}">Dispatch Job</a>
+                </li>
+            @endif
+            @if(\App\Helpers\can('change.settings'))
+                <li>
+                    <a href="{{ route('settings') }}">Settings</a>
+                </li>
+            @endif
             <li>
                 <form id="logout" method="post" action="{{ route('logout') }}">
                     @csrf

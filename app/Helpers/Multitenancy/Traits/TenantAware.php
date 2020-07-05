@@ -18,14 +18,12 @@ trait TenantAware
             return;
         }
 
-        $tenantId = Tenant::currentId();
-
-        static::addGlobalScope('tenant', function ($query) use ($tenantId) {
-            $query->where(fn($query) => $query->where('tenant_id', $tenantId));
+        static::addGlobalScope('tenant', function ($query) {
+            $query->where(fn($query) => $query->where('tenant_id', Tenant::currentId()));
         });
 
-        static::creating(function ($model) use ($tenantId) {
-            $model->tenant_id = $tenantId;
+        static::creating(function ($model) {
+            $model->tenant_id = Tenant::currentId();
         });
     }
 

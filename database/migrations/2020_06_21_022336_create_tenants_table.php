@@ -12,7 +12,7 @@ class CreateTenantsTable extends Migration
     public function up()
     {
         Schema::create('tenants', function (Blueprint $table) {
-            $table->uuid('id')->index();
+            $table->uuid('id')->primary();
             $table->string('domain')->unique()->index();
             $table->string('name');
             $table->timestamps();

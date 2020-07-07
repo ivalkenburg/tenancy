@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers\Multitenancy\Models;
+namespace App\Support\Multitenancy\Models;
 
 use App\Traits\UsesUuid;
 

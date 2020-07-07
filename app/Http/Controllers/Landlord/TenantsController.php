@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Landlord;
 
-use App\Helpers\Multitenancy\Models\Tenant;
+use App\Support\Multitenancy\Models\Tenant;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;

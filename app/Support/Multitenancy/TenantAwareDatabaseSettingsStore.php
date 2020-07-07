@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Helpers\Multitenancy;
+namespace App\Support\Multitenancy;
 
-use App\Helpers\Multitenancy\Models\Tenant;
+use App\Support\Multitenancy\Models\Tenant;
 use App\Packages\LaravelSettings\Stores\DatabaseStore;
 
 class TenantAwareDatabaseSettingsStore extends DatabaseStore

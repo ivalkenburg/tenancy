@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Helpers\Multitenancy\Middleware;
+namespace App\Support\Multitenancy\Middleware;
 
-use App\Helpers\Multitenancy\Models\Tenant;
+use App\Support\Multitenancy\Models\Tenant;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;

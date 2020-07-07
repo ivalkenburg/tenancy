@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
-use App\Helpers\Multitenancy\Models\Tenant;
-use App\Helpers\Multitenancy\Traits\TenantAware;
+use App\Support\Multitenancy\Models\Tenant;
+use App\Support\Multitenancy\Traits\TenantAware;
 use App\Traits\UsesUuid;
 
 class Role extends \Spatie\Permission\Models\Role
 {
     use TenantAware, UsesUuid;
 
+    /**
+     * @return void
+     */
     protected static function bootTenantAware()
     {
         if (!Tenant::isMultitenancyEnabled()) {

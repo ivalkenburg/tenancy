@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Helpers\Multitenancy\Rules;
+namespace App\Support\Multitenancy\Rules;
 
-use App\Helpers\Multitenancy\Models\Tenant;
+use App\Support\Multitenancy\Models\Tenant;
 
 class Unique extends \Illuminate\Validation\Rules\Unique
 {

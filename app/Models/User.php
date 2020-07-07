@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Helpers\Multitenancy\Traits\TenantAware;
+use App\Support\Multitenancy\Traits\TenantAware;
 use App\Notifications\ResetPasswordNotification;
 use App\Traits\UsesUuid;
 use Illuminate\Foundation\Auth\User as Authenticatable;

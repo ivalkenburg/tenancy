@@ -6,7 +6,7 @@ use App\Packages\LaravelSettings\Facades\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use function App\Helpers\can;
+use function App\Support\can;
 
 class SettingsController extends Controller
 {

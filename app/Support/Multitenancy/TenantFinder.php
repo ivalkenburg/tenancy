@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Helpers\Multitenancy;
+namespace App\Support\Multitenancy;
 
-use App\Helpers\Multitenancy\Models\Tenant;
+use App\Support\Multitenancy\Models\Tenant;
 use Illuminate\Http\Request;
 use Spatie\Multitenancy\Models\Tenant as BaseTenant;
 
@@ -15,7 +15,7 @@ class TenantFinder extends \Spatie\Multitenancy\TenantFinder\TenantFinder
     public function findForRequest(Request $request): ?BaseTenant
     {
         // TODO: add caching
-        // TODO: add multi domain
+        // TODO: add multiple domain support
 
         return Tenant::where('domain', $request->getHost())->first();
     }

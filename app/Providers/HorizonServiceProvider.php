@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Helpers\Multitenancy\Models\Tenant;
+use App\Support\Multitenancy\Models\Tenant;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Laravel\Horizon\Horizon;

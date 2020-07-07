@@ -48,7 +48,7 @@
             "database/factories"
         ],
         "files": [
-            "app/Helpers/helpers.php",
+            "app/Support/helpers.php",
             "app/Packages/LaravelSettings/helpers.php"
         ]
     },

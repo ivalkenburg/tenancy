@@ -16,7 +16,7 @@ return [
      * Used store.
      */
 
-    'store' => App\Helpers\Multitenancy\TenantAwareDatabaseSettingsStore::class,
+    'store' => App\Support\Multitenancy\TenantAwareDatabaseSettingsStore::class,
 
     /*
      * Database store settings.

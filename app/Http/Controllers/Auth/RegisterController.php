@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Helpers\Multitenancy\Rules\Unique;
+use App\Support\Multitenancy\Rules\Unique;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller

@@ -13,12 +13,12 @@
                 <a href="{{ route('register') }}">Register</a>
             </li>
         @else
-            @if(\App\Helpers\can('send.mails'))
+            @if(\App\Support\can('send.mails'))
                 <li>
                     <a href="{{ route('mail') }}">Send Mail</a>
                 </li>
             @endif
-            @if(\App\Helpers\can('dispatch.jobs'))
+            @if(\App\Support\can('dispatch.jobs'))
                 <li>
                     <a href="{{ route('job') }}">Dispatch Job</a>
                 </li>

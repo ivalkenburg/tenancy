@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Helpers\Multitenancy\Models\Tenant;
+use App\Support\Multitenancy\Models\Tenant;
 use Faker\Generator as Faker;
 
 $factory->define(Tenant::class, function (Faker $faker) {

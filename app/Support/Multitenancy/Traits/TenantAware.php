@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Helpers\Multitenancy\Traits;
+namespace App\Support\Multitenancy\Traits;
 
-use App\Helpers\Multitenancy\Models\Tenant;
+use App\Support\Multitenancy\Models\Tenant;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

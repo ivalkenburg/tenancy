@@ -175,7 +175,7 @@ return [
          * Custom Service Providers
          */
         App\Packages\LaravelSettings\LaravelSettingsServiceProvider::class,
-        App\Helpers\Multitenancy\MultitenancyServiceProvider::class
+        App\Support\Multitenancy\MultitenancyServiceProvider::class
     ],
 
     /*
@@ -227,7 +227,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Tenant' => App\Helpers\Multitenancy\Models\Tenant::class,
+        'Tenant' => App\Support\Multitenancy\Models\Tenant::class,
     ],
 
     /*

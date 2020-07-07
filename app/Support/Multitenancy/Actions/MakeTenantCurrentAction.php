@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Helpers\Multitenancy\Actions;
+namespace App\Support\Multitenancy\Actions;
 
-use App\Helpers\Multitenancy\Models\Tenant;
+use App\Support\Multitenancy\Models\Tenant;
 use Spatie\Multitenancy\Models\Tenant as BaseTenant;
 
 class MakeTenantCurrentAction extends \Spatie\Multitenancy\Actions\MakeTenantCurrentAction

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Multitenancy\Models\Tenant;
+use App\Support\Multitenancy\Models\Tenant;
 use App\Jobs\DelayedJob;
 use App\Mail\TestMail;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\Response;
-use function App\Helpers\can;
+use function App\Support\can;
 
 class HomeController extends Controller
 {

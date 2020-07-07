@@ -5,7 +5,7 @@
 @section('content')
     <h1>Settings</h1>
     <pre>@json($settings, JSON_PRETTY_PRINT)</pre>
-    @if(\App\Helpers\can('change.settings'))
+    @if(\App\Support\can('change.settings'))
         <form method="post" action="{{ route('settings') }}">
             @csrf
             <label for="foobar">Foobar</label>

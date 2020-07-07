@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Helpers\Multitenancy\Actions;
+namespace App\Support\Multitenancy\Actions;
 
-use App\Helpers\Multitenancy\Models\Tenant;
+use App\Support\Multitenancy\Models\Tenant;
 
 class MakeQueueTenantAwareAction extends \Spatie\Multitenancy\Actions\MakeQueueTenantAwareAction
 {

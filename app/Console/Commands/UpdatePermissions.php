@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Helpers\Multitenancy\Models\Tenant;
+use App\Support\Multitenancy\Models\Tenant;
 use App\Models\Role;
 use App\Models\Permission;
 use Illuminate\Console\Command;

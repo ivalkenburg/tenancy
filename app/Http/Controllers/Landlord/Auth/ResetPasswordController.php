@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Landlord\Auth;
 
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 
 class ResetPasswordController extends Controller
 {
@@ -13,7 +15,7 @@ class ResetPasswordController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:landlord');
     }
 
     /**
@@ -34,5 +36,21 @@ class ResetPasswordController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required', 'string', 'confirmed'],
         ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function guard()
+    {
+        return Auth::guard('landlord');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function broker()
+    {
+        return Password::broker('landlords');
     }
 }

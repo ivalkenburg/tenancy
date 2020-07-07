@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Landlord\Auth;
 
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
@@ -13,7 +13,15 @@ class ForgotPasswordController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:landlord');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function showLinkRequestForm()
+    {
+        return view('landlord.auth.passwords.email');
     }
 
     /**
@@ -21,7 +29,7 @@ class ForgotPasswordController extends Controller
      */
     protected function sendResetLinkResponse(Request $request, $response)
     {
-        return redirect()->back()->with('status', $response);
+        return redirect()->back()->with('status', Password::RESET_LINK_SENT);
     }
 
     /**
@@ -30,5 +38,13 @@ class ForgotPasswordController extends Controller
     protected function sendResetLinkFailedResponse(Request $request, $response)
     {
         return $this->sendResetLinkResponse($request, $response);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function broker()
+    {
+        return Password::broker('landlords');
     }
 }

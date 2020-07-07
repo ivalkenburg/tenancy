@@ -81,8 +81,8 @@ class TenantsController extends Controller
      */
     public function login(Tenant $tenant, $user)
     {
-        $token = Str::random(32);
-        $tenant->execute(fn() => Cache::put("ext_login_{$token}", $user, 5));
+        $token = Str::random(64);
+        $tenant->execute(fn() => Cache::put($token, $user, 5));
 
         return redirect($tenant->url("/login/{$token}", false));
     }

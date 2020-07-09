@@ -12,6 +12,9 @@
             <a href="{{ route('horizon.index') }}">Horizon</a>
         </li>
         <li>
+            <a href="{{ route('landlord.test') }}">Test Notification</a>
+        </li>
+        <li>
             <form id="logout" method="POST" action="{{ route('landlord.logout') }}">
                 @csrf
                 <a href="#" onclick="document.getElementById('logout').submit()">Logout</a>

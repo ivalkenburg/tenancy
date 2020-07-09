@@ -13,7 +13,8 @@ Route::group(['namespace' => 'Auth'], function () {
 });
 
 Route::middleware('auth:landlord')->group(function () {
-    Route::get('/', 'HomeController')->name('landlord.home');
+    Route::get('/', 'HomeController@home')->name('landlord.home');
+    Route::get('/test', 'HomeController@test')->name('landlord.test');
 
     Route::group(['prefix' => 'tenants'], function () {
         Route::get('/', 'TenantsController@index')->name('landlord.tenants.index');

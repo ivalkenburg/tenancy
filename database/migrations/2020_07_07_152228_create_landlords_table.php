@@ -14,7 +14,7 @@ class CreateLandlordsTable extends Migration
         Schema::create('landlords', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('email')->index();
+            $table->string('email')->unique()->index();
             $table->string('password');
             $table->string('remember_token')->nullable();
             $table->timestamps();

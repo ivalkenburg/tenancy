@@ -8,8 +8,11 @@
     <title>Test Mail</title>
 </head>
 <body>
-    <h1>Hello {{ Tenant::isMultitenancyEnabled() ? Tenant::current()->name : 'Non-tenant' }}</h1>
+    <h1>Hello {{ $name }}</h1>
     <ul>
+        @if(Tenant::isMultitenancyEnabled())
+            <li>Tenant: {{ Tenant::current()->name }}</li>
+        @endif
         <li>Setting: {{ settings()->get('foobar') }}</li>
         <li>Cached value: {{ cache('cached_value') }}</li>
         <li><a href="{{ route('home') }}">Home</a></li>

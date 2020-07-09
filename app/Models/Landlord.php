@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Notifications\ResetPasswordNotification;
+use App\Notifications\Landlord\ResetPasswordNotification;
 use App\Traits\UsesUuid;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -34,6 +34,6 @@ class Landlord extends Authenticatable
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new ResetPasswordNotification($token, 'landlord.password.reset'));
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

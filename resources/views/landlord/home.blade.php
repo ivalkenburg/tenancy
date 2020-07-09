@@ -12,7 +12,10 @@
             <a href="{{ route('horizon.index') }}">Horizon</a>
         </li>
         <li>
-            <a href="{{ route('landlord.test') }}">Test Notification</a>
+            <a href="{{ route('landlord.notification') }}">Notification</a>
+        </li>
+        <li>
+            <a href="{{ route('landlord.mail') }}">Mail</a>
         </li>
         <li>
             <form id="logout" method="POST" action="{{ route('landlord.logout') }}">

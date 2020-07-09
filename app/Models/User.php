@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Support\Multitenancy\Traits\TenantAware;
-use App\Notifications\ResetPasswordNotification;
 use App\Traits\UsesUuid;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -31,13 +30,5 @@ class User extends Authenticatable
     protected function setPasswordAttribute($password)
     {
         $this->attributes['password'] = Hash::make($password);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ResetPasswordNotification($token));
     }
 }

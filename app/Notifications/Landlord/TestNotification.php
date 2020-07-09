@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Landlord;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Spatie\Multitenancy\Jobs\NotTenantAware;
 
-class TestNotification extends Notification implements ShouldQueue
+class TestNotification extends Notification implements ShouldQueue, NotTenantAware
 {
     use Queueable;
 

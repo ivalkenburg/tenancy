@@ -33,4 +33,12 @@ class DelayedJob implements ShouldQueue
     {
         sleep($this->sleep);
     }
+
+    /**
+     * @return string[]
+     */
+    public function tags()
+    {
+        return ['hello:world'];
+    }
 }

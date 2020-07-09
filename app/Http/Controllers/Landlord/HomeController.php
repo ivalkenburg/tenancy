@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Landlord;
 
-use App\Notifications\TestNotification;
+use App\Mail\Landlord\TestMail;
+use App\Notifications\Landlord\TestNotification;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -19,9 +21,19 @@ class HomeController extends Controller
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function test()
+    public function notification()
     {
         auth()->user()->notify(new TestNotification(Str::random()));
+
+        return redirect()->back();
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function mail()
+    {
+        Mail::to(auth()->user())->send(new TestMail(auth()->user()->name));
 
         return redirect()->back();
     }

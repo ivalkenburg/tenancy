@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\Landlord;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Spatie\Multitenancy\Jobs\NotTenantAware;
 
-class TestMail extends Mailable implements ShouldQueue
+class TestMail extends Mailable implements ShouldQueue, NotTenantAware
 {
     use Queueable, SerializesModels;
 
@@ -26,6 +27,6 @@ class TestMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->view('mail.test');
+        return $this->view('landlord.mail.test');
     }
 }

@@ -23,6 +23,11 @@
                     <a href="{{ route('job') }}">Dispatch Job</a>
                 </li>
             @endif
+            @if(\App\Support\can('send.notifications'))
+                <li>
+                    <a href="{{ route('notification') }}">Send Notification</a>
+                </li>
+            @endif
             <li>
                 <a href="{{ route('settings') }}">Settings</a>
             </li>

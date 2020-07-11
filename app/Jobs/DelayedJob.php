@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Spatie\Multitenancy\Jobs\TenantAware;
 
 class DelayedJob implements ShouldQueue
 {
@@ -32,13 +33,5 @@ class DelayedJob implements ShouldQueue
     public function handle()
     {
         sleep($this->sleep);
-    }
-
-    /**
-     * @return string[]
-     */
-    public function tags()
-    {
-        return ['hello:world'];
     }
 }

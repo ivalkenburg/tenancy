@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TenantAware
 {
-    const VALID_TENANT_SESSION_KEY = '__tenant_id';
+    const VALID_TENANT_SESSION_KEY = '_tenant_id';
 
     /**
      * @param Request $request

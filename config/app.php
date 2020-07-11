@@ -240,9 +240,10 @@ return [
             'Default User' => 'Default user created and managed by the application',
         ],
         'permissions' => [
-            'dispatch.jobs' => ['Default Admin'],
-            'send.mails' => ['Default User', 'Default Admin'],
-            'change.settings' => ['Default Admin']
+            'dispatch.jobs' => ['Default Admin', 'Default User'],
+            'send.mails' => ['Default Admin', 'Default User'],
+            'change.settings' => ['Default Admin', 'Default User'],
+            'send.notifications' => ['Default Admin', 'Default User'],
         ]
     ]
 ];

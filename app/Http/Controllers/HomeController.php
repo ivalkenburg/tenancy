@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\TestNotification;
 use App\Support\Multitenancy\Models\Tenant;
 use App\Jobs\DelayedJob;
 use App\Mail\TestMail;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
@@ -28,10 +28,21 @@ class HomeController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function mail(Request $request)
+    public function notification()
+    {
+        abort_unless(can('send.notifications'), Response::HTTP_UNAUTHORIZED);
+
+        auth()->user()->notify(new TestNotification);
+
+        return redirect()->back();
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function mail()
     {
         abort_unless(can('send.mails'), Response::HTTP_UNAUTHORIZED);
 

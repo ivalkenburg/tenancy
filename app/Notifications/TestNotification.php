@@ -1,30 +1,18 @@
 <?php
 
-namespace App\Notifications\Landlord;
+namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Spatie\Multitenancy\Jobs\NotTenantAware;
 
-class TestNotification extends Notification implements ShouldQueue, NotTenantAware
+class TestNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    /** @var string */
-    public $token;
-
     /**
-     * @param string $token
-     */
-    public function __construct($token)
-    {
-        $this->token = $token;
-    }
-
-    /**
-     * @param $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -34,13 +22,14 @@ class TestNotification extends Notification implements ShouldQueue, NotTenantAwa
 
     /**
      * @param mixed $notifiable
-     * @return MailMessage
+     * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
         return (new MailMessage)
             ->greeting('Hello, ' . $notifiable->name)
             ->line('The introduction to the notification.')
+            ->line('Setting is: '. settings()->get('foobar'))
             ->action('Notification Action', url('/'))
             ->line('Thank you for using our application!');
     }

@@ -2,7 +2,9 @@
 
 namespace App\Support\Multitenancy\Models;
 
+use App\Support\Multitenancy\TenantFinder;
 use App\Traits\UsesUuid;
+use Illuminate\Support\Facades\Redis;
 
 class Tenant extends \Spatie\Multitenancy\Models\Tenant
 {
@@ -11,6 +13,17 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
     protected static $multitenancyEnabled;
 
     protected $guarded = [];
+
+    /**
+     * @inheritDoc
+     */
+    protected static function boot()
+    {
+        static::updating(fn($tenant) => $tenant->clearCached());
+        static::deleted(fn($tenant) => $tenant->clearCached());
+
+        parent::boot();
+    }
 
     /**
      * @return string|null
@@ -26,7 +39,7 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
     public static function isMultitenancyEnabled()
     {
         if (!isset(static::$multitenancyEnabled)) {
-            static::$multitenancyEnabled = (bool) config('multitenancy.enable');
+            static::$multitenancyEnabled = (bool)config('multitenancy.enable');
         }
 
         return static::$multitenancyEnabled;
@@ -40,5 +53,15 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
     public function url($path = null, $secure = true)
     {
         return ($secure ? 'https://' : 'http://') . trim($this->domain, '/') . '/' . trim($path ?? '', '/');
+    }
+
+    /**
+     * @return $this
+     */
+    public function clearCached()
+    {
+        Redis::hdel(TenantFinder::TENANTS_CACHE_KEY, md5($this->getOriginal('domain')));
+
+        return $this;
     }
 }

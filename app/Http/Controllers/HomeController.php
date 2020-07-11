@@ -35,7 +35,8 @@ class HomeController extends Controller
     {
         abort_unless(can('send.mails'), Response::HTTP_UNAUTHORIZED);
 
-        Mail::to($request->user())->send(new TestMail);
+        $user = auth()->user();
+        Mail::to($user)->send(new TestMail($user->name));
 
         return redirect()->back();
     }

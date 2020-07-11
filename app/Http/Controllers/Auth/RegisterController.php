@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Support\Multitenancy\Rules\Unique;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,6 +14,7 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     protected $redirectTo = '/';
+    protected $defaultRole = 'Default User';
 
     public function __construct()
     {
@@ -43,5 +45,13 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => $data['password'],
         ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function registered(Request $request, $user)
+    {
+        $user->assignRole($this->defaultRole);
     }
 }

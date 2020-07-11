@@ -9,14 +9,17 @@ use Illuminate\Validation\Rule;
 
 class CreateLandlord extends Command
 {
-    protected $signature = 'app:create-landlord {name} {email} {password}';
+    protected $signature = 'app:create-landlord {name} {email} {password} {--silent-error}';
     protected $description = 'Create landlord for managing tenants';
 
+    /**
+     * @return int
+     */
     public function handle()
     {
         if (!Tenant::isMultitenancyEnabled()) {
             $this->error('Multitenancy needs to be enabled to create a landlord.');
-            return 1;
+            return $this->option('silent-error') ? 0 : 1;
         }
 
         $validator = $this->argumentsValidator();
@@ -56,6 +59,6 @@ class CreateLandlord extends Command
             $this->error($error);
         }
 
-        return 1;
+        return $this->option('silent-error') ? 0 : 1;
     }
 }

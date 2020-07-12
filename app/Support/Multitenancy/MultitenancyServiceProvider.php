@@ -15,7 +15,8 @@ class MultitenancyServiceProvider extends \Spatie\Multitenancy\MultitenancyServi
             return;
         }
 
-        $this->registerTenantFinder()
+        $this
+            ->registerTenantFinder()
             ->registerTasksCollection()
             ->configureRequests()
             ->configureQueue();

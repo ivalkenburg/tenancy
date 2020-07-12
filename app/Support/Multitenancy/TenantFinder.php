@@ -29,7 +29,7 @@ class TenantFinder extends \Spatie\Multitenancy\TenantFinder\TenantFinder
      */
     protected function getTenantByDomain($domain)
     {
-        $tenant = unserialize(Redis::hget(static::TENANTS_CACHE_KEY, md5($domain)));
+        $tenant = unserialize(Redis::hget(static::TENANTS_CACHE_KEY, $domain));
 
         if ($tenant) {
             return $tenant;
@@ -41,7 +41,7 @@ class TenantFinder extends \Spatie\Multitenancy\TenantFinder\TenantFinder
             return null;
         }
 
-        Redis::hset(static::TENANTS_CACHE_KEY, md5($domain), serialize($tenant));
+        Redis::hset(static::TENANTS_CACHE_KEY, $domain, serialize($tenant));
 
         return $tenant;
     }

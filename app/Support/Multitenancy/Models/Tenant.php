@@ -60,7 +60,7 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
      */
     public function clearCached()
     {
-        Redis::hdel(TenantFinder::TENANTS_CACHE_KEY, md5($this->getOriginal('domain')));
+        Redis::hdel(TenantFinder::TENANTS_CACHE_KEY, $this->getOriginal('domain'));
 
         return $this;
     }

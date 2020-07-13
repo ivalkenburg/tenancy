@@ -244,6 +244,7 @@ return [
             'send.mails' => ['Default Admin', 'Default User'],
             'change.settings' => ['Default Admin', 'Default User'],
             'send.notifications' => ['Default Admin', 'Default User'],
+            'manage.posts' => ['Default Admin', 'Default User'],
         ]
     ]
 ];

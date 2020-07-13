@@ -39,6 +39,9 @@
             </li>
         @endguest
         <li>
+            <a href="{{ route('posts.index') }}">Posts</a>
+        </li>
+        <li>
             <a href="{{ route('cache') }}">Cached Value {{ cache('cached_value') }}</a>
         </li>
         @if(Tenant::isMultitenancyEnabled())

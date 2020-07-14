@@ -25,6 +25,10 @@ trait TenantAware
         static::creating(function ($model) {
             $model->tenant_id = Tenant::currentId();
         });
+
+        static::retrieved(function ($model) {
+            $model->makeHidden('tenant_id');
+        });
     }
 
     /**

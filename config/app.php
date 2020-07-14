@@ -174,6 +174,7 @@ return [
         /*
          * Custom Service Providers
          */
+        App\Packages\LaravelTotp\LaravelTotpServiceProvider::class,
         App\Packages\LaravelSettings\LaravelSettingsServiceProvider::class,
         App\Support\Multitenancy\MultitenancyServiceProvider::class
     ],

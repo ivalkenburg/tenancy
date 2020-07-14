@@ -3,14 +3,16 @@
 namespace App\Models;
 
 use App\Notifications\Landlord\ResetPasswordNotification;
+use App\Packages\LaravelTotp\Contracts\TotpVerifiableContract;
+use App\Packages\LaravelTotp\TotpVerifiable;
 use App\Traits\UsesUuid;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
-class Landlord extends Authenticatable
+class Landlord extends Authenticatable implements TotpVerifiableContract
 {
-    use UsesUuid, Notifiable;
+    use UsesUuid, Notifiable, TotpVerifiable;
 
     protected $fillable = [
         'name', 'email', 'password',

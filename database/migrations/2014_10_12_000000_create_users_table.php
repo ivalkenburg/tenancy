@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('password');
+            $table->text('totp_secret')->nullable();
             $table->uuid('tenant_id')->index()->nullable();
             $table->rememberToken();
             $table->timestamps();

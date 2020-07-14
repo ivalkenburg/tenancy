@@ -16,7 +16,8 @@ class CreateLandlordsTable extends Migration
             $table->string('name');
             $table->string('email')->unique()->index();
             $table->string('password');
-            $table->string('remember_token')->nullable();
+            $table->text('totp_secret')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

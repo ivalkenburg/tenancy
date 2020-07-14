@@ -18,6 +18,9 @@
             <a href="{{ route('landlord.mail') }}">Mail</a>
         </li>
         <li>
+            <a href="{{ route('landlord.event') }}">Event</a>
+        </li>
+        <li>
             <form id="logout" method="POST" action="{{ route('landlord.logout') }}">
                 @csrf
                 <a href="#" onclick="document.getElementById('logout').submit()">Logout</a>

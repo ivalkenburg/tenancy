@@ -2,10 +2,13 @@
 
 namespace App\Packages\LaravelTotp;
 
+use Illuminate\Support\Traits\Macroable;
 use PragmaRX\Google2FA\Google2FA;
 
 class Authenticator
 {
+    use Macroable;
+
     /** @var Google2FA */
     protected static $google2fa;
 

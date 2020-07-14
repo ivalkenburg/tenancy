@@ -13,6 +13,8 @@ Route::group(['namespace' => 'Auth'], function () {
 });
 
 Route::middleware('auth:landlord')->group(function () {
+    Route::totp();
+
     Route::get('/', 'HomeController@home')->name('landlord.home');
     Route::get('/notification', 'HomeController@notification')->name('landlord.notification');
     Route::get('/mail', 'HomeController@mail')->name('landlord.mail');

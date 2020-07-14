@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['confirm' => false, 'verify' => false]);
 Route::get('/login/{token}', 'Auth\LoginController@extLogin')->name('login.ext');
 
+Route::totp('auth');
+
 Route::get('/', 'HomeController@home')->name('home');
 Route::get('/mail', 'HomeController@mail')->name('mail');
 Route::get('/job', 'HomeController@job')->name('job');

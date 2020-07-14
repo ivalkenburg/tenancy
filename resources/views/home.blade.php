@@ -29,6 +29,16 @@
                 </li>
             @endif
             <li>
+                @if(auth()->user()->hasTotpEnabled())
+                    <form method="post" action="{{ route('totp.disable') }}" id="disable-totp">
+                        @csrf
+                        <a href="#" onclick="document.getElementById('disable-totp').submit()">Disable Totp</a>
+                    </form>
+                @else
+                    <a href="{{ route('totp.enable') }}">Enable Totp</a>
+                @endif
+            </li>
+            <li>
                 <a href="{{ route('settings') }}">Settings</a>
             </li>
             <li>

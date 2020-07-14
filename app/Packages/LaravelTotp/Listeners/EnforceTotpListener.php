@@ -91,12 +91,12 @@ class EnforceTotpListener implements EnforceTotpContract
     protected function throwResponse(TotpVerifiableContract $user, $error)
     {
         $view = view('totp::verify', [
-            'user' => $user,
             'action' => $this->request->fullUrl(),
+            'user' => $user,
             'credentials' => $this->credentials,
             'guard' => $this->guard,
-            'codeInputName' => static::CODE_INPUT_NAME,
             'remember' => $this->remember,
+            'codeInputName' => static::CODE_INPUT_NAME,
             'error' => $error,
         ]);
 

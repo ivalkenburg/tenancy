@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Landlord;
 
-use App\Events\TestEvent;
 use App\Mail\Landlord\TestMail;
 use App\Notifications\Landlord\TestNotification;
 use Illuminate\Routing\Controller;
@@ -35,16 +34,6 @@ class HomeController extends Controller
     public function mail()
     {
         Mail::to(auth()->user())->send(new TestMail(auth()->user()->name));
-
-        return redirect()->back();
-    }
-
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function event()
-    {
-        event(new TestEvent);
 
         return redirect()->back();
     }

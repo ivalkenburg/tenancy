@@ -40,20 +40,10 @@ class MakeQueueTenantAwareAction extends \Spatie\Multitenancy\Actions\MakeQueueT
             return true;
         }
 
-        if (config('multitenancy.queues_are_tenant_aware_by_default')) {
-            if ($reflection->implementsInterface(NotTenantAware::class)) {
-                return false;
-            }
-        }
-
-        if (! config('multitenancy.queues_are_tenant_aware_by_default')) {
-            if ($reflection->implementsInterface(TenantAware::class)) {
-                return true;
-            }
-
+        if ($reflection->implementsInterface(NotTenantAware::class)) {
             return false;
         }
 
-        return true;
+        return config('multitenancy.queues_are_tenant_aware_by_default') === true;
     }
 }

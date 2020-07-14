@@ -24,9 +24,19 @@ trait TotpVerifiable
      * @param string $secret
      * @return TotpVerifiable
      */
-    public function setTotpSecret($secret = null)
+    public function setTotpSecret($secret)
     {
-        $this->totp_secret = $secret ? encrypt($secret) : null;
+        $this->totp_secret = encrypt($secret);
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function disableTotp()
+    {
+        $this->totp_secret = null;
 
         return $this;
     }

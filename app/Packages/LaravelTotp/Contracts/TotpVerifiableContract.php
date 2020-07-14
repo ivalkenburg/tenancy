@@ -16,6 +16,11 @@ interface TotpVerifiableContract
     public function setTotpSecret($secret);
 
     /**
+     * @return $this
+     */
+    public function disableTotp();
+
+    /**
      * @return string|null
      */
     public function getTotpSecret();

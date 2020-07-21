@@ -47,6 +47,9 @@
                     <a href="#" onclick="document.getElementById('logout').submit()">Logout</a>
                 </form>
             </li>
+            <li>
+                <a href="{{ route('totp_required') }}">Totp Required</a>
+            </li>
         @endguest
         <li>
             <a href="{{ route('posts.index') }}">Posts</a>

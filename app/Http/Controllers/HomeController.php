@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Notifications\TestNotification;
+use App\Packages\LaravelTotp\Http\Middleware\EnsureTotpEnabled;
 use App\Support\Multitenancy\Models\Tenant;
 use App\Jobs\DelayedJob;
 use App\Mail\TestMail;
@@ -17,6 +18,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['home', 'cache', 'test']);
+        $this->middleware(EnsureTotpEnabled::class)->only('totpRequired');
     }
 
     /**
@@ -72,5 +74,13 @@ class HomeController extends Controller
         Cache::put('cached_value', Tenant::currentId() ?: 'no tenant', 200000);
 
         return redirect()->back();
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function totpRequired()
+    {
+        return view('totp_required');
     }
 }

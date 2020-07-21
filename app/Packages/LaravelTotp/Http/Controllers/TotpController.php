@@ -80,7 +80,7 @@ class TotpController extends Controller
             'verification_code' => ['required', 'string', 'digits:6', VerifyTotp::withSecret($secret)]
         ]);
 
-        $validator->after(fn () => session()->flash(static::INTENDED_TOTP_SECRET, $secret));
+        $validator->after(fn() => session()->flash(static::INTENDED_TOTP_SECRET, $secret));
         $validator->validate();
     }
 
@@ -96,9 +96,9 @@ class TotpController extends Controller
     {
         return view('totp::enable', [
             'redirect' => $request->get('redirect'),
-            'force' => $request->has('force'),
+            'forced' => $request->boolean('forced'),
             'secret' => $secret,
-            'qrCode' => $this->generateGoogleQRCode($secret),
+            'qrCode' => $this->generateQrCode($secret),
         ]);
     }
 
@@ -127,11 +127,11 @@ class TotpController extends Controller
      * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
      * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
      */
-    protected function generateGoogleQRCode($secret)
+    protected function generateQrCode($secret)
     {
-        $uri = urlencode(Authenticator::generateUri($this->getIssuer(), $this->getHolder(), $secret));
-
-        return "https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl={$uri}";
+        return app(config('totp.qr_code_generator'))->generate(
+            urlencode(Authenticator::generateUri($this->getIssuer(), $this->getHolder(), $secret))
+        );
     }
 
     /**

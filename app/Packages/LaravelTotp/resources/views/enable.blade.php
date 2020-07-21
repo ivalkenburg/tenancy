@@ -9,6 +9,9 @@
 </head>
 <body>
     <h1>Activate Two-factor Authentication</h1>
+    @if($forced)
+        <p>This page requires 2fa to be enabled.</p>
+    @endif
     <img src="{{ $qrCode }}" alt="{{ $secret }}">
     <pre>{{ $secret }}</pre>
     <form method="post" action="{{ route('totp.enable') }}">

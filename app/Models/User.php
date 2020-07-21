@@ -37,7 +37,9 @@ class User extends Authenticatable implements TotpVerifiableContract
         'remember_token'
     ];
 
-    protected $attributes = ['confirmed' => true];
+    protected $attributes = [
+        'confirmed' => true
+    ];
 
     /**
      * @inheritDoc

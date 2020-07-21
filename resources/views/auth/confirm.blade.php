@@ -19,6 +19,6 @@
             <label for="password_confirmation">Password Confirmation</label>
             <input type="password" id="password_confirmation" name="password_confirmation">
         </div>
-        <button type="submit">Confirm User Accoount</button>
+        <button type="submit">Confirm User Account</button>
     </form>
 @endsection

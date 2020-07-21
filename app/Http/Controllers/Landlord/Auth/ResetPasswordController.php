@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Landlord\Auth;
 
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
@@ -16,6 +18,20 @@ class ResetPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest:landlord');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function resetPassword($user, $password)
+    {
+        $this->setUserPassword($user, $password);
+
+        $user->setRememberToken(Str::random(60));
+
+        $user->save();
+
+        event(new PasswordReset($user));
     }
 
     /**

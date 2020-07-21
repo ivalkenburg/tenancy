@@ -9,7 +9,7 @@ class ResetPasswordController extends Controller
 {
     use ResetsPasswords;
 
-    protected $redirectTo = '/';
+    const REDIRECT = '/';
 
     public function __construct()
     {
@@ -34,5 +34,13 @@ class ResetPasswordController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required', 'string', 'confirmed'],
         ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function redirectPath()
+    {
+        return static::REDIRECT;
     }
 }

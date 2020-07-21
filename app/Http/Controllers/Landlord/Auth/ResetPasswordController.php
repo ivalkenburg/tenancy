@@ -11,7 +11,7 @@ class ResetPasswordController extends Controller
 {
     use ResetsPasswords;
 
-    protected $redirectTo = '/';
+    const REDIRECT = '/';
 
     public function __construct()
     {
@@ -52,5 +52,13 @@ class ResetPasswordController extends Controller
     public function broker()
     {
         return Password::broker('landlords');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function redirectPath()
+    {
+        return static::REDIRECT;
     }
 }

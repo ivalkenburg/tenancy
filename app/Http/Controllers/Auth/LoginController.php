@@ -13,7 +13,7 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/';
+    const REDIRECT = '/';
 
     /**
      * @return void
@@ -34,5 +34,13 @@ class LoginController extends Controller
         Auth::login(User::findOrFail($userId));
 
         return redirect($this->redirectPath());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function redirectPath()
+    {
+        return static::REDIRECT;
     }
 }

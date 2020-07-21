@@ -1,15 +1,25 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\User;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class TestNotification extends Notification implements ShouldQueue
+class ConfirmedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
+
+    protected $ip;
+
+    /**
+     * @param string $ip
+     */
+    public function __construct($ip)
+    {
+        $this->ip = $ip;
+    }
 
     /**
      * @param mixed $notifiable
@@ -27,9 +37,10 @@ class TestNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Account Confirmation')
+            ->subject('Account Confirmed')
             ->greeting("Hey, {$notifiable->name}")
-            ->line('Click the "Confirm" button to complete the confirmation process.')
-            ->action('Confirm', route('confirm.show', [$notifiable->confirmation_token]) . '?email=' . $notifiable->email);
+            ->line("Your account ({$notifiable->email}) has successfully been confirmed.")
+            ->line("The confirmation was made from IP address: {$this->ip}")
+            ->line('If you did not initiate this confirmation, please contact your administrator immediately.');
     }
 }

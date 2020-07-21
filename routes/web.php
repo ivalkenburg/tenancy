@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Auth::routes(['confirm' => false, 'verify' => false]);
+Auth::routes();
 Route::get('/login/{token}', 'Auth\LoginController@extLogin')->name('login.ext');
+Route::get('/confirm/{token}', 'Auth\ConfirmController@show')->name('confirm.show');
+Route::post('/confirm', 'Auth\ConfirmController@confirm')->name('confirm.post');
 
 Route::totp('auth');
 

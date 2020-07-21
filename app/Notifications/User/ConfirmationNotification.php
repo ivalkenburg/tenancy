@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\User;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class TestNotification extends Notification implements ShouldQueue
+class ConfirmationNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -30,6 +30,6 @@ class TestNotification extends Notification implements ShouldQueue
             ->subject('Account Confirmation')
             ->greeting("Hey, {$notifiable->name}")
             ->line('Click the "Confirm" button to complete the confirmation process.')
-            ->action('Confirm', route('confirm.show', [$notifiable->confirmation_token]) . '?email=' . $notifiable->email);
+            ->action('Confirm', route('confirm.show', ['token' => $notifiable->confirmation_token, 'email' => $notifiable->email]));
     }
 }

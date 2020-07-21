@@ -13,8 +13,8 @@ class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = '/';
-    protected $defaultRole = 'Default User';
+    const REDIRECT = '/';
+    const DEFAULT_ROLE = 'Default User';
 
     public function __construct()
     {
@@ -29,7 +29,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Unique::on('users')],
+            'email' => ['required', 'email', Unique::on('users')],
             'password' => ['required', 'string', 'confirmed'],
         ]);
     }
@@ -52,6 +52,14 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        $user->assignRole($this->defaultRole);
+        $user->assignRole(static::DEFAULT_ROLE);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function redirectPath()
+    {
+        return static::REDIRECT;
     }
 }

@@ -41,7 +41,7 @@ class RoleExists implements Rule
 
         $count = Role::query()
             ->where('guard_name', $this->guard)
-            ->when($names->isNotEmpty(), fn($query) => $query->whereIn('name', $names))
+             ->when($names->isNotEmpty(), fn($query) => $query->whereIn('name', $names))
             ->when($uuids->isNotEmpty(), fn($query) => $query->whereIn('id', $uuids))
             ->count();
 

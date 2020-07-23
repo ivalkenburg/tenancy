@@ -36,7 +36,7 @@ class TenantFinder extends \Spatie\Multitenancy\TenantFinder\TenantFinder
             return $tenant;
         }
 
-        $tenant = Tenant::where('domain', $domain)->first();
+        $tenant = Tenant::byDomain($domain)->first();
 
         if (!$tenant) {
             return null;

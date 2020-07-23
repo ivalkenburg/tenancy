@@ -2,9 +2,11 @@
 
 namespace App\Support\Multitenancy\Models;
 
+use App\Support\Multitenancy\Casts\Domains;
 use App\Support\Multitenancy\TenantFinder;
 use App\Traits\UsesUuid;
-use Illuminate\Support\Facades\Redis;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Cache;
 
 class Tenant extends \Spatie\Multitenancy\Models\Tenant
 {
@@ -13,6 +15,10 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
     protected static $multitenancyEnabled;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'domains' => Domains::class,
+    ];
 
     /**
      * @inheritDoc
@@ -46,13 +52,23 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
     }
 
     /**
+     * @param Builder $query
+     * @param string $name
+     * @return Builder
+     */
+    protected function scopeByDomain($query, $name)
+    {
+        return $query->whereRaw('domains @> ?', ["[{\"name\": \"{$name}\"}]"]);
+    }
+
+    /**
      * @param string $path
      * @param bool $secure
      * @return string
      */
     public function url($path = null, $secure = true)
     {
-        return ($secure ? 'https://' : 'http://') . trim($this->domain, '/') . '/' . trim($path ?? '', '/');
+        return ($secure ? 'https://' : 'http://') . trim($this->domains->default(), '/') . '/' . trim($path ?? '', '/');
     }
 
     /**
@@ -60,7 +76,9 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
      */
     public function clearCached()
     {
-        Redis::hdel(TenantFinder::TENANTS_CACHE_KEY, $this->getOriginal('domain'));
+        $this->getOriginal('domains')->each(
+            fn($domain) => Cache::connection()->hdel(TenantFinder::TENANTS_CACHE_KEY, $domain['name'])
+        );
 
         return $this;
     }

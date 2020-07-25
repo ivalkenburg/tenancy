@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\User\ConfirmationNotification;
+use App\Notifications\User\ResetPasswordNotification;
 use App\Packages\LaravelTotp\Contracts\TotpVerifiableContract;
 use App\Packages\LaravelTotp\TotpVerifiable;
 use App\Support\Multitenancy\Traits\TenantAware;
@@ -72,5 +73,13 @@ class User extends Authenticatable implements TotpVerifiableContract
     protected function setPasswordAttribute($password)
     {
         $this->attributes['password'] = Hash::make($password);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

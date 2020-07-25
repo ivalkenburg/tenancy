@@ -19,7 +19,7 @@ class CreateUser extends Command
     public function handle()
     {
         if (Tenant::isMultitenancyEnabled()) {
-            $this->error('Multitenancy needs to be enabled to create a user.');
+            $this->error('Multitenancy needs to be disabled to create a user.');
             return $this->option('silence-error') ? 0 : 1;
         }
 

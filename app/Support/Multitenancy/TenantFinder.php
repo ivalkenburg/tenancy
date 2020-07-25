@@ -18,8 +18,6 @@ class TenantFinder extends \Spatie\Multitenancy\TenantFinder\TenantFinder
      */
     public function findForRequest(Request $request): ?BaseTenant
     {
-        // TODO: add multiple domain support
-
         return $this->getTenantByDomain($request->getHost());
     }
 

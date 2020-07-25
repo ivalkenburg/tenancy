@@ -27,9 +27,9 @@ class TestNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Account Confirmation')
+            ->subject('Test Notification')
             ->greeting("Hey, {$notifiable->name}")
-            ->line('Click the "Confirm" button to complete the confirmation process.')
-            ->action('Confirm', route('confirm.show', [$notifiable->confirmation_token]) . '?email=' . $notifiable->email);
+            ->line('This is a test notification')
+            ->action('Go To Site', route('home'));
     }
 }

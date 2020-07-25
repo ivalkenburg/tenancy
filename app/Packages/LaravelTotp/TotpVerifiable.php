@@ -9,7 +9,7 @@ trait TotpVerifiable
      */
     protected static function bootTotpVerifiable()
     {
-        static::retrieved(fn ($verifiable) => $verifiable->makeHidden('totp_secret'));
+        static::retrieved(fn($verifiable) => $verifiable->makeHidden('totp_secret'));
     }
 
     /**
@@ -17,7 +17,7 @@ trait TotpVerifiable
      */
     public function hasTotpEnabled()
     {
-        return (bool) $this->totp_secret;
+        return (bool)$this->totp_secret;
     }
 
     /**
@@ -52,9 +52,16 @@ trait TotpVerifiable
     /**
      * @param int $code
      * @return bool
+     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
+     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
      */
-    public function validTotpCode($code)
+    public function verifyTotpCode($code)
     {
-        return true;
+        if (!$this->hasTotpEnabled()) {
+            throw new \Exception('Unable to verify code; no secret is set.');
+        }
+
+        return Authenticator::verify($this->getTotpSecret(), $code);
     }
 }

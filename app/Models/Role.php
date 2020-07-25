@@ -19,12 +19,16 @@ class Role extends \Spatie\Permission\Models\Role
             return;
         }
 
-        $tenantId = Tenant::currentId();
-
-        static::addGlobalScope('tenant', function ($query) use ($tenantId) {
-            $query->where(fn($query) => $query->where('tenant_id', $tenantId)->orWhereNull('tenant_id'));
+        static::addGlobalScope('tenant', function ($query) {
+            $query->where(fn($query) => $query->where('tenant_id', Tenant::currentId())->orWhereNull('tenant_id'));
         });
 
-        static::creating(fn($model) => $model->tenant_id = $tenantId);
+        static::creating(function ($model) {
+            return $model->tenant_id = Tenant::currentId();
+        });
+
+        static::retrieved(function ($model) {
+            $model->makeHidden('tenant_id');
+        });
     }
 }

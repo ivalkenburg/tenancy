@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Landlord;
 
 use App\Support\Multitenancy\Models\Tenant;
 use App\Models\User;
+use App\Support\Multitenancy\Rules\ValidDomains;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Symfony\Component\HttpFoundation\Response;
 
 class TenantsController extends Controller
 {
@@ -43,35 +45,39 @@ class TenantsController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         $request->validate([
-            'domain' => ['required', 'string', Rule::unique('tenants')],
             'name' => ['required', 'string'],
+            'domains' => [new ValidDomains],
         ]);
 
-        Tenant::create($request->only('domain', 'name'));
+        Tenant::create($request->only('domains', 'name'));
 
-        return redirect(route('landlord.tenants.index'));
+        return $request->expectsJson()
+            ? response()->json(['redirect' => route('landlord.tenants.index')])
+            : redirect(route('landlord.tenants.index'));
     }
 
     /**
      * @param Tenant $tenant
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function update(Tenant $tenant, Request $request)
     {
         $request->validate([
-            'domain' => ['required', 'string', Rule::unique('tenants')->ignore($tenant->id)],
             'name' => ['required', 'string'],
+            'domains' => [ValidDomains::forTenant($tenant)],
         ]);
 
-        $tenant->update($request->only('domain', 'name'));
+        $tenant->update($request->only('name', 'domains'));
 
-        return redirect(route('landlord.tenants.index'));
+        return $request->expectsJson()
+            ? response()->json(['redirect' => route('landlord.tenants.index')])
+            : redirect(route('landlord.tenants.index'));
     }
 
     /**

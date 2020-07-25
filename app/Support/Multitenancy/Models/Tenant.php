@@ -76,9 +76,9 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
      */
     public function clearCached()
     {
-        $this->getOriginal('domains')->each(
-            fn($domain) => Cache::connection()->hdel(TenantFinder::TENANTS_CACHE_KEY, $domain['name'])
-        );
+        foreach($this->getOriginal('domains')->toArray() as $domain) {
+            Cache::connection()->hdel(TenantFinder::TENANTS_CACHE_KEY, $domain['name']);
+        }
 
         return $this;
     }

@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 
 class CreateUser extends Command
 {
-    protected $signature = 'app:create-user {email} {name} {role} {password?} {--silence-error}';
+    protected $signature = 'app:create-user {name} {email} {role} {password?} {--silence-error}';
     protected $description = 'Create a user';
 
     /**

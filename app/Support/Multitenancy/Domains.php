@@ -4,7 +4,7 @@ namespace App\Support\Multitenancy;
 
 use Illuminate\Contracts\Support\Arrayable;
 
-class Domains implements Arrayable, \JsonSerializable
+class Domains implements Arrayable, \JsonSerializable, \ArrayAccess
 {
     protected $domains;
 
@@ -90,5 +90,37 @@ class Domains implements Arrayable, \JsonSerializable
     public function jsonSerialize()
     {
         return $this->domains;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->domains[$offset]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetGet($offset)
+    {
+        return $this->domains[$offset];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->domains[$offset] = $value;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->domains[$offset]);
     }
 }

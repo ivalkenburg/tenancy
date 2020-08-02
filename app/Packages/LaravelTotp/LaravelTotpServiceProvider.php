@@ -41,11 +41,11 @@ class LaravelTotpServiceProvider extends ServiceProvider
         $this->app['events']->listen(Attempting::class, EnforceTotpContract::class . '@saveCredentials');
         $this->app['events']->listen(Validated::class, EnforceTotpContract::class . '@validate');
 
-        Router::macro('totp', function ($middleware = [], $prefix = 'totp', $name = '') {
-            $this->group(compact('middleware', 'prefix'), function () use ($name) {
-                $this->get('/enable', '\App\Packages\LaravelTotp\Http\Controllers\TotpController@enable')->name($name . 'totp.enable');
+        Router::macro('totp', function ($middleware = [], $prefix = 'totp', $namePrefix = '') {
+            $this->group(compact('middleware', 'prefix'), function () use ($namePrefix) {
+                $this->get('/enable', '\App\Packages\LaravelTotp\Http\Controllers\TotpController@enable')->name($namePrefix . 'totp.enable');
                 $this->post('/enable', '\App\Packages\LaravelTotp\Http\Controllers\TotpController@confirm');
-                $this->post('/disable', '\App\Packages\LaravelTotp\Http\Controllers\TotpController@disable')->name($name . 'totp.disable');
+                $this->post('/disable', '\App\Packages\LaravelTotp\Http\Controllers\TotpController@disable')->name($namePrefix . 'totp.disable');
             });
         });
     }

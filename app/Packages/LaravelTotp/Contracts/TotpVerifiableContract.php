@@ -29,5 +29,5 @@ interface TotpVerifiableContract
      * @param string $code
      * @return bool
      */
-    public function validTotpCode($code);
+    public function verifyTotpCode($code);
 }

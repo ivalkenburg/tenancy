@@ -35,7 +35,8 @@ class User extends Authenticatable implements TotpVerifiableContract
 
     protected $hidden = [
         'password',
-        'remember_token'
+        'remember_token',
+        'confirmation_token',
     ];
 
     protected $attributes = [

@@ -41,7 +41,7 @@ class Domains implements Arrayable, \JsonSerializable, \ArrayAccess
             throw new \Exception("Domain [{$name}] does not exist.");
         }
 
-        foreach($this->domains as &$domain) {
+        foreach ($this->domains as &$domain) {
             $domain['default'] = $domain['name'] === $name;
         }
 
@@ -54,7 +54,7 @@ class Domains implements Arrayable, \JsonSerializable, \ArrayAccess
      */
     public function has($name)
     {
-        foreach($this->domains as $domain) {
+        foreach ($this->domains as $domain) {
             if ($domain['name'] === $name) {
                 return true;
             }

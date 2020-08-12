@@ -62,7 +62,7 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
     }
 
     /**
-     * @param string $path
+     * @param string|null $path
      * @param bool $secure
      * @return string
      */
@@ -76,7 +76,7 @@ class Tenant extends \Spatie\Multitenancy\Models\Tenant
      */
     public function clearCached()
     {
-        foreach($this->getOriginal('domains')->toArray() as $domain) {
+        foreach ($this->getOriginal('domains')->toArray() as $domain) {
             Cache::connection()->hdel(TenantFinder::TENANTS_CACHE_KEY, $domain['name']);
         }
 

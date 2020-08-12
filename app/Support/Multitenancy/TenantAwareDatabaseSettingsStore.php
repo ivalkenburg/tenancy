@@ -25,7 +25,8 @@ class TenantAwareDatabaseSettingsStore extends DatabaseStore
     /**
      * @return array
      */
-    protected function mergedWithInserts() {
+    protected function mergedWithInserts()
+    {
         return Tenant::isMultitenancyEnabled() ? ['tenant_id' => Tenant::currentId()] : [];
     }
 }

@@ -18,7 +18,7 @@ class DatabaseStore extends Store
      */
     public function __construct(Application $app)
     {
-        $this->db     = $app['db']->connection();
+        $this->db = $app['db']->connection();
         $this->config = $app['config']->get('settings.database');
 
         parent::__construct($app);
@@ -39,7 +39,7 @@ class DatabaseStore extends Store
     protected function read()
     {
         $flatData = $this->newQuery()->get();
-        $results  = $this->defaults();
+        $results = $this->defaults();
 
         foreach ($flatData as $row) {
             Arr::set($results, $row->key, unserialize($row->value));
@@ -53,15 +53,15 @@ class DatabaseStore extends Store
      */
     protected function write($settings)
     {
-        $keys     = $this->newQuery()->pluck($this->config['key']);
+        $keys = $this->newQuery()->pluck($this->config['key']);
         $settings = Arr::dot($settings);
-        $removed  = [];
+        $removed = [];
 
         foreach ($keys as $key) {
             if (array_key_exists($key, $settings)) {
                 $this->newQuery()
-                     ->where($this->config['key'], $key)
-                     ->update([$this->config['value'] => serialize($settings[$key])]);
+                    ->where($this->config['key'], $key)
+                    ->update([$this->config['value'] => serialize($settings[$key])]);
             } else {
                 $removed[] = $key;
             }
@@ -99,7 +99,7 @@ class DatabaseStore extends Store
 
         foreach ($settings as $key => $value) {
             $inserts[] = array_merge([
-                $this->config['key']   => $key,
+                $this->config['key'] => $key,
                 $this->config['value'] => serialize($value)
             ], $additional);
         }

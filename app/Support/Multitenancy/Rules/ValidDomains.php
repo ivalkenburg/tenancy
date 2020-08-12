@@ -60,7 +60,7 @@ class ValidDomains implements Rule
             'domains.*.name' => ['required', 'string'],
             'domains.*.default' => ['required', 'boolean'],
         ])->passes();
-        }
+    }
 
     /**
      * @param array $domains

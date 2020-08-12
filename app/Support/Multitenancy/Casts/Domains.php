@@ -19,7 +19,6 @@ class Domains implements CastsAttributes
      */
     public function set($model, string $key, $value, array $attributes)
     {
-
         return json_encode($value instanceof \App\Support\Multitenancy\Domains ? $value->toArray() : $value);
     }
 }

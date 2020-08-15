@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1afa0a9c3197165436e6e742f6644cb5",
+    "content-hash": "36a14d7124643f25b2c1df357a1cc450",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2558,16 +2558,16 @@
         },
         {
             "name": "spatie/laravel-permission",
-            "version": "3.13.0",
+            "version": "dev-public-initialize-cache",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "49b8063fbb9ec52ebef98cc6ec527a80d8853141"
+                "url": "https://github.com/ivalkenburg/laravel-permission.git",
+                "reference": "57cf539b79095a563c782e11f2510f908be796dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/49b8063fbb9ec52ebef98cc6ec527a80d8853141",
-                "reference": "49b8063fbb9ec52ebef98cc6ec527a80d8853141",
+                "url": "https://api.github.com/repos/ivalkenburg/laravel-permission/zipball/57cf539b79095a563c782e11f2510f908be796dc",
+                "reference": "57cf539b79095a563c782e11f2510f908be796dc",
                 "shasum": ""
             },
             "require": {
@@ -2598,7 +2598,16 @@
                     "src/helpers.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Spatie\\Permission\\Test\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -2622,13 +2631,16 @@
                 "security",
                 "spatie"
             ],
+            "support": {
+                "source": "https://github.com/ivalkenburg/laravel-permission/tree/public-initialize-cache"
+            },
             "funding": [
                 {
-                    "url": "https://spatie.be/open-source/support-us",
-                    "type": "custom"
+                    "type": "custom",
+                    "url": "https://spatie.be/open-source/support-us"
                 }
             ],
-            "time": "2020-05-20T00:31:29+00:00"
+            "time": "2020-08-15T01:47:21+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -7248,7 +7260,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "spatie/laravel-permission": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

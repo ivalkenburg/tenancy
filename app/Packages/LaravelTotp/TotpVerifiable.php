@@ -52,9 +52,7 @@ trait TotpVerifiable
     /**
      * @param int $code
      * @return bool
-     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
-     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
-     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \Exception
      */
     public function verifyTotpCode($code)
     {

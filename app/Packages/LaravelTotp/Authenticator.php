@@ -16,9 +16,7 @@ class Authenticator
      * @param string $secret
      * @param string $code
      * @return bool|int
-     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
-     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
-     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \Exception
      */
     public static function verify($secret, $code)
     {
@@ -28,9 +26,7 @@ class Authenticator
     /**
      * @param int $length
      * @return string
-     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
-     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
-     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \Exception
      */
     public static function generateSecret($length = 32)
     {
@@ -42,9 +38,7 @@ class Authenticator
      * @param string $holder
      * @param string|null $secret
      * @return string
-     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
-     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
-     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \Exception
      */
     public static function generateUri($issuer, $holder, $secret = null)
     {

@@ -40,10 +40,6 @@ class VerifyTotp implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (!$this->totpSecret) {
-            return false;
-        }
-
         try {
             return $this->verify($value);
         } catch (\Exception $exception) {
@@ -54,13 +50,11 @@ class VerifyTotp implements Rule
     /**
      * @param string $code
      * @return bool|int
-     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
-     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
-     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \Exception
      */
     public function verify($code)
     {
-        if (!$this->totpSecret) {
+        if (!is_string($code) || empty($code)) {
             return false;
         }
 

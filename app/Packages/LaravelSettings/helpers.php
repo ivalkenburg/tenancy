@@ -4,7 +4,7 @@ use App\Packages\LaravelSettings\SettingsManager;
 
 if (!function_exists('settings')) {
     /**
-     * @param string $key
+     * @param string|null $key
      * @param mixed $default
      * @return mixed
      */

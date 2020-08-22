@@ -16,9 +16,7 @@ class TotpController extends Controller
     /**
      * @param Request $request
      * @return \Illuminate\View\View
-     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
-     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
-     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \Exception
      */
     public function enable(Request $request)
     {
@@ -88,9 +86,7 @@ class TotpController extends Controller
      * @param Request $request
      * @param string $secret
      * @return \Illuminate\View\View
-     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
-     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
-     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \Exception
      */
     protected function sendEnableResponse(Request $request, $secret)
     {
@@ -123,9 +119,7 @@ class TotpController extends Controller
     /**
      * @param string $secret
      * @return string
-     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
-     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
-     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \Exception
      */
     protected function generateQrCode($secret)
     {

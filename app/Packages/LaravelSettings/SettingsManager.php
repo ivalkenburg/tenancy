@@ -24,7 +24,7 @@ class SettingsManager
      * @return Store
      * @throws \Exception
      */
-    protected function instantiateStore()
+    protected function createStore()
     {
         $store = config('settings.store');
 
@@ -42,7 +42,7 @@ class SettingsManager
     public function store()
     {
         if (!isset($this->store)) {
-            $this->store = $this->instantiateStore();
+            $this->store = $this->createStore();
         }
 
         return $this->store;

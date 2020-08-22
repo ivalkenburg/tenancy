@@ -79,7 +79,7 @@ abstract class Store
     }
 
     /**
-     * @param string $key
+     * @param string|null $key
      * @param mixed $default
      * @return mixed
      */
@@ -161,8 +161,7 @@ abstract class Store
 
         if (is_array($key)) {
             foreach ($key as $k => $v) {
-                Arr::set($this->settings, $k, $v);
-                $this->unsaved = true;
+                $this->set($k, $v);
             }
         } else {
             Arr::set($this->settings, $key, $value);
